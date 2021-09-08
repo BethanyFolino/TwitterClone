@@ -1,0 +1,14 @@
+{% include 'navbar.html' %}
+<hr>
+<h2>{{twitter_user.username}}'s Profile</h2>
+<!--Following: {number following}-->
+<!--Tweets: {number of tweets made}-->
+<!--Follow button if not request.user hasn't followed this user yet-->
+<!--Unfollow button if request.user has followed this user-->
+{% for tweet in tweets %}
+{% if tweet.created_by == request.user %} <!--add tagged by and followed user tweets-->
+<h3>{{tweet.created_by}}</h3>
+<h4>{{tweet.text}}</h4>
+<h4>{{tweet.dated_created}}</h4>
+{% endif %}
+{% endfor %}

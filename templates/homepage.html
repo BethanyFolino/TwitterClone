@@ -1,0 +1,12 @@
+{% include 'navbar.html' %}
+<hr>
+<h2>Welcome to Twitter, {request.user.username}!</h2>
+{% for tweet in tweets %}
+{% if tweet.created_by == request.user %} <!--add tagged by and followed user tweets-->
+<h3>{{tweet.created_by}}</h3>
+<h4>{{tweet.text}}</h4>
+<h4>{{tweet.dated_created}}</h4>
+<h4><a href='/user/{{user.id}}'>{{tweet.created_by}}'s Profile</a></h4>
+<h4><a href='/tweet/{{tweet.id}}'>Tweet Details</a></h4>
+{% endif %}
+{% endfor %}

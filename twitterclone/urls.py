@@ -15,18 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-# from twitteruser.views import homepage
-# from authentication.views import login_view, logout_view
+from twitteruser.views import user_profile, follow_view, unfollow_view
+from tweet.views import homepage, create_tweet, tweet_detail
+from authentication.views import login_view, signup_view, logout_view
 
 urlpatterns = [
-    # path('user/<int:user_id>/', user_profile, name='userprofile'),
-    # path('follow/<int:user_id>/', follow_view, name='follow'),
-    # path('unfollow/<int:user_id>/', unfollow_view, name='unfollow'),
-    # path('tweet/', create_tweet, name='tweet'),
-    # path('tweet/<int:tweet_id/', tweet_detail, name='tweetdetail'),
-    # path('', homepage, name='home'),
+    path('user/<int:id>/', user_profile, name='userprofile'),
+    path('follow/<int:id>/', follow_view, name='follow'),
+    path('unfollow/<int:id>/', unfollow_view, name='unfollow'),
+    path('tweet/', create_tweet, name='tweet'),
+    path('tweet/<int:id/', tweet_detail, name='tweetdetail'),
+    path('', homepage, name='home'),
     path('admin/', admin.site.urls),
-    # path('login/', login_view, name='login'),
-    # path('signup/', signup_view, name='signup'),
-    # path('logout/', logout_view, name='logout'),
+    path('login/', login_view, name='login'),
+    path('signup/', signup_view, name='signup'),
+    path('logout/', logout_view, name='logout'),
 ]
