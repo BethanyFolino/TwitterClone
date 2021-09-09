@@ -1,5 +1,11 @@
-{% include 'navbar.html' %}
-<hr>
-<h2>{{tweet.created_by}}</h2>
-<h3>{{tweet.text}}</h3>
-<h3>{{tweet.date_created}}</h3>
+{% extends 'base.html' %} {% block content %}
+<link rel="stylesheet" href="/static/css/style.css">
+<div class='card text-dark bg-light mb-3' style='width: 22rem'>
+    <h4 class='card-header'>{{tweet.created_by}}</h4>
+    <div class='card-body'>
+        <h5 class='card-title'>{{tweet.text}}</h5>
+        <h6 class='card-title'>{{tweet.date_created}}</h6>
+        <a class='btn btn-primary btn-sm' href='/user/{{tweet.created_by.id}}/'>{{tweet.created_by}}'s Profile</a>
+    </div>
+</div>
+{% endblock %}

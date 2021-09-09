@@ -19,7 +19,7 @@ def login_view(request):
                 return HttpResponseRedirect(reverse('home'))
 
     form = LoginForm()
-    return render(request, 'generic_form.html', {"form": form})
+    return render(request, 'login_form.html', {"form": form})
 
 def signup_view(request):
     if request.method == "POST":
@@ -29,7 +29,7 @@ def signup_view(request):
             twitter_user1 = TwitterUser.objects.create_user(username=data['username'], password=data['password'])
             return HttpResponseRedirect(reverse('home'))
     form = SignupForm()
-    return render(request, 'generic_form.html', {'form': form})
+    return render(request, 'signup_form.html', {'form': form})
 
 def logout_view(request):
     logout(request)

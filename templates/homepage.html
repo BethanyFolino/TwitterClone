@@ -1,12 +1,24 @@
-{% include 'navbar.html' %}
+{% extends 'base.html' %} {% block content %}
+<link rel="stylesheet" href="/static/css/style.css">
+<h2>Welcome to Twitter, {{request.user.username}}!</h2>
+<h5>Number of Tweets Created: {{tweet_count}}</h5>
+<h5>Number Following: {{request.user.following.count}}</h5>
+<h5>Following:</h5>
+{% for value in request.user.following.values %}
+<h6>{{value.username}}</h6>
+{% endfor %}
 <hr>
-<h2>Welcome to Twitter, {request.user.username}!</h2>
 {% for tweet in tweets %}
-{% if tweet.created_by == request.user %} <!--add tagged by and followed user tweets-->
-<h3>{{tweet.created_by}}</h3>
-<h4>{{tweet.text}}</h4>
-<h4>{{tweet.dated_created}}</h4>
-<h4><a href='/user/{{user.id}}'>{{tweet.created_by}}'s Profile</a></h4>
-<h4><a href='/tweet/{{tweet.id}}'>Tweet Details</a></h4>
+{% if tweet %} <!--add tagged by and followed user tweets-->
+<div class='card text-dark bg-light mb-3' style='width: 22rem'>
+    <h4 class='card-header'>{{tweet.created_by}}</h4>
+    <div class='card-body'>
+        <h5 class='card-title'>{{tweet.text}}</h5>
+        <h6 class='card-title'>{{tweet.date_created}}</h6>
+        <a class='btn btn-primary btn-sm' href='/user/{{tweet.created_by.id}}/'>{{tweet.created_by}}'s Profile</a>
+        <a class='btn btn-primary btn-sm' href='/tweet/{{tweet.id}}/'>Tweet Details</a>
+    </div>
+</div>
 {% endif %}
 {% endfor %}
+{% endblock %}

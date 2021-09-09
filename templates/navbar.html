@@ -1,13 +1,18 @@
 {% if not user.is_authenticated %}
 <h3>Welcome! Please log in to use Twitter!</h3>
+    
+<h4>Need to make an account? Sign up here!</h4>
+<a class='btn btn-primary btn-sm' href='/signup/'>Sign Up</a>
 {% endif %}
 {% if user.is_authenticated %}
-<h1>Twitter</h1>
-Welcome to Twitter, {{request.user.username}}!
-<nav>
-    <a class='btn btn-light btn-sm' href='/'>Home</a>
-    <a class='btn btn-light btn-sm' href='/login/'>Log In</a>
-    <a class='btn btn-light btn-sm' href='/tweet/'>Tweet</a>
-    <a class='btn btn-light btn-sm' href='/user/{{user.id}}/'>Your Profile</a>
-    <a class='btn btn-light btn-sm' href='/logout/'>Log Out</a>
+<nav class='navbar navbar-primary bg-primary'>
+    <div class='container-fluid'>
+        <a class='navbar-brand' href='#' style='color: white'>🕊️ Twitter</a>
+        <a class='nav-link' href='/' style='color: white'>Home</a>
+        <a class='nav-link' href='/login/' style='color: white'>Log In</a>
+        <a class='nav-link' href='/tweet/' style='color: white'>Tweet</a>
+        <a class='nav-link' href='/user/{{user.id}}/' style='color: white'>Your Profile</a>
+        <a class='nav-link' href='/logout/' style='color: white'>Log Out</a>
+    </div>
 </nav>
+{% endif %}

@@ -10,8 +10,12 @@ from django.contrib.auth.models import AbstractUser
 from django import forms
 
 # Create your views here.
+@login_required
 def homepage(request):
-    ...
+    tweets = Tweet.objects.all().order_by('-id')
+    users_tweets = Tweet.objects.filter(created_by=request.user)
+    tweet_count = users_tweets.count()
+    return render(request, 'homepage.html', {'tweets': tweets, 'tweet_count': tweet_count})
 
 def create_tweet(request):
     if request.method == 'POST':
@@ -24,7 +28,7 @@ def create_tweet(request):
             )
             return HttpResponseRedirect(reverse('home'))
     form = CreateTweetForm()
-    return render(request, 'generic_form.html', {'form': form})
+    return render(request, 'tweet_form.html', {'form': form})
 
 
 def tweet_detail(request, id):
