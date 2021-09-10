@@ -1,10 +1,19 @@
 {% extends 'base.html' %} {% block content %}
 <link rel="stylesheet" href="/static/css/style.css">
+<br>
 {% for notification in notifications %}
 {% if notification.new == True %}
-<h1>{{notification.message}}</h1>
-{% else %}
+<div class='card' style='width: 18rem'>
+    <div class='card-body'>
+        <h4 class='card-title'>{{notification.user_to_notify}}</h4>
+        <h4 class='card-title'>{{notification.message}}</h4>
+        <h4 class='card-title'>{{notification.new}}</h4>
+    </div>
+</div>
+{% elif not notification.new == False %}
 <h2>No notifications for you!</h2>
+{% endif %}
+{% endfor %}
 {% endblock %}
 
 <!--Or should it go like this...-->
