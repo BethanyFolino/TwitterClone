@@ -1,10 +1,13 @@
 {% extends 'base.html' %} {% block content %}
 <link rel="stylesheet" href="/static/css/style.css">
 <h2>{{twitter_user.username}}'s Profile</h2>
-{% if twitter_user != request.user %}
+{% if not request.user.is_authenticated %}
+<h5>@{{twitter_user.username}}</h5>
+{% elif twitter_user != request.user %}
 <a class='btn btn-primary btn-sm' href='/follow/{{twitter_user.id}}/'>Follow</a>
 <a class='btn btn-primary btn-sm' href='/unfollow/{{twitter_user.id}}/'>Unfollow</a>
 {% endif %}
+
 <h5>Number of Tweets Created: {{tweet_count}}</h5>
 <h5>Number Following: {{twitter_user.following.count}}</h5>
 <h5>Following:</h5>
@@ -14,7 +17,7 @@
 <hr>
 <h4>Tweets:</h4>
 {% for tweet in tweets %}
-{% if tweet.created_by == twitter_user %} <!--add tagged by and followed user tweets-->
+{% if tweet.created_by == twitter_user %}
 <div class='card text-dark bg-light mb-3' style='width: 22rem'>
     <h4 class='card-header'>{{tweet.created_by}}</h4>
     <div class='card-body'>

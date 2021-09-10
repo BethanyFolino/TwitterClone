@@ -20,13 +20,13 @@ def homepage(request):
     tweet_count = users_tweets.count()
     # tweets from users current user is following
     following = request.user.following.values_list('id')
+    following_tweets = []
     for item in following:
         follow_id = item[0]
-        print(follow_id)
-        # individual_tweets = Tweet.objects.filter(id=follow_id)
-        # following_tweets.append(individual_tweets[0])
-    # print(following_tweets)
-    return render(request, 'homepage.html', {'tweets': tweets, 'users_tweets': users_tweets, 'follow_id': follow_id, 'tweet_count': tweet_count})
+        individual_tweets = Tweet.objects.filter(created_by_id=follow_id)
+        following_tweets.append(individual_tweets[0])
+    print(following_tweets)
+    return render(request, 'homepage.html', {'tweets': tweets, 'users_tweets': users_tweets, 'following_tweets': following_tweets, 'tweet_count': tweet_count})
 
 def create_tweet(request):
     if request.method == 'POST':

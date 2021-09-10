@@ -20,7 +20,7 @@
     </div>
 </div> 
 {% endif %} 
-{% if tweet.created_by.id == follow_id %}
+{% if tweet in following_tweets %}
 <div class='card text-dark bg-light mb-3' style='width: 22rem'>
     <h4 class='card-header'>{{tweet.created_by}}</h4>
     <div class='card-body'>
