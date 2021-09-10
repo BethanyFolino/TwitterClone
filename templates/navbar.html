@@ -1,11 +1,15 @@
 {% if not user.is_authenticated %}
 <h5>Welcome! Please log in to use Twitter!</h5>
-<a class='btn btn-primary btn-sm' href='/login/'>Login</a>    
+{% endif %}
+{% if request.path == '/signup/' %}
+<a class='btn btn-primary btn-sm' href='/login/'>Login</a>
+{% endif %} 
+{% if request.path == '/login/' %}   
 <h5>Need to make an account? Sign up here!</h5>
 <a class='btn btn-primary btn-sm' href='/signup/'>Sign Up</a>
-<br>
-<br>
 {% endif %}
+<br>
+<br>
 {% if user.is_authenticated %}
 <nav class='navbar navbar-primary bg-primary'>
     <div class='container-fluid'>
@@ -14,6 +18,7 @@
         <a class='nav-link' href='/login/' style='color: white'>Log In</a>
         <a class='nav-link' href='/tweet/' style='color: white'>Tweet</a>
         <a class='nav-link' href='/user/{{user.id}}/' style='color: white'>Your Profile</a>
+        <a class='nav-link' href='/notifications/' style='color: white'>Notifications</a>
         <a class='nav-link' href='/logout/' style='color: white'>Log Out</a>
     </div>
 </nav>
