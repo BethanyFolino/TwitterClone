@@ -47,8 +47,17 @@ def create_tweet(request):
             if search_tweets:
                 tagged = TwitterUser.objects.filter(username=tag_regex)
                 tag_tweet = Tweet.objects.filter(text=data['text'])
+
+                all_users = TwitterUser.objects.all()
+                names = [x.username for x in all_users]
+                print(names)
+                tagged_user_string = ''
+                for person in search_tweets:
+                    tagged_user_string += person
+                print(tagged_user_string)
+                tag_user = TwitterUser.objects.get(username=tagged_user_string)
                 
-                notify = lambda x: x.objects.create(message=tweet, user_to_notify=tweet.created_by)
+                notify = lambda x: x.objects.create(message=tweet, user_to_notify=tag_user)
                 notify(Notification)
             return HttpResponseRedirect(reverse('home'))
     form = CreateTweetForm()
