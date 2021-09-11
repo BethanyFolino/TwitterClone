@@ -10,11 +10,8 @@
         <h4 class='card-title'>{{notification.new}}</h4>
     </div>
 </div>
+{% elif request.user != notification.user_to_notify %}
+<h4>Slow tweet day...nothing to notify you about...</h4>
 {% endif %}
 {% endfor %}
 {% endblock %}
-
-<!--Or should it go like this...-->
-<!--{{tweet.created_by}}-->
-<!--{{tweet.text}}-->
-<!--{{tweet.date_created}}-->
