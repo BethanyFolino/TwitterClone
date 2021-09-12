@@ -9,7 +9,7 @@
 {% endfor %}
 <hr>
 {% for tweet in tweets %}
-{% if tweet.created_by == request.user %} <!--add tagged by and followed user tweets-->
+{% if tweet.created_by == request.user or tweet.created_by in request.user.following.all %}
  <div class='card text-dark bg-light mb-3' style='width: 22rem'>
     <h4 class='card-header'>{{tweet.created_by}}</h4>
     <div class='card-body'>
@@ -19,17 +19,6 @@
         <a class='btn btn-primary btn-sm' href='/tweet/{{tweet.id}}/'>Tweet Details</a>
     </div>
 </div> 
-{% endif %} 
-{% if tweet in following_tweets %}
-<div class='card text-dark bg-light mb-3' style='width: 22rem'>
-    <h4 class='card-header'>{{tweet.created_by}}</h4>
-    <div class='card-body'>
-        <h5 class='card-title'>{{tweet.text}}</h5>
-        <h6 class='card-title'>{{tweet.date_created}}</h6>
-        <a class='btn btn-primary btn-sm' href='/user/{{tweet.created_by.id}}/'>{{tweet.created_by}}'s Profile</a>
-        <a class='btn btn-primary btn-sm' href='/tweet/{{tweet.id}}/'>Tweet Details</a>
-    </div>
-</div>
 {% endif %}
 {% endfor %}
 {% endblock %}

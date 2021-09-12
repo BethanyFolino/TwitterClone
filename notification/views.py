@@ -10,4 +10,6 @@ from django import forms
 # Create your views here.
 def notification_view(request):
     notifications = Notification.objects.all().order_by('-id')
+    for notification in notifications:
+        notification.delete()
     return render(request, 'notification.html', {'notifications': notifications})
