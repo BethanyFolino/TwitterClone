@@ -9,6 +9,5 @@ from django import forms
 
 # Create your views here.
 def notification_view(request):
-    notifications = Notification.objects.all()
-    # do something here to get notifications to go away once viewed
+    notifications = Notification.objects.all().order_by('-id')
     return render(request, 'notification.html', {'notifications': notifications})
