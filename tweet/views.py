@@ -31,6 +31,13 @@ def homepage(request):
     print(following_tweets)
     return render(request, 'homepage.html', {'tweets': tweets, 'users_tweets': users_tweets, 'following_tweets': following_tweets, 'tweet_count': tweet_count})
 
+
+def tweet_detail(request, id):
+    tweet = Tweet.objects.get(id=id)
+    return render(request, 'tweet_detail.html', {'tweet': tweet})
+
+
+@login_required
 def create_tweet(request):
     if request.method == 'POST':
         form = CreateTweetForm(request.POST)
@@ -64,6 +71,4 @@ def create_tweet(request):
     return render(request, 'tweet_form.html', {'form': form})
 
 
-def tweet_detail(request, id):
-    tweet = Tweet.objects.get(id=id)
-    return render(request, 'tweet_detail.html', {'tweet': tweet})
+

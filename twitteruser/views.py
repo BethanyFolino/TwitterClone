@@ -4,6 +4,7 @@ from tweet.models import Tweet
 from twitterclone.settings import AUTH_USER_MODEL
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.decorators import login_required
 from django import forms
 
 # Create your views here.
@@ -14,12 +15,14 @@ def user_profile(request, id):
     tweet_count = users_tweets.count()
     return render(request, 'user_profile.html', {'twitter_user': twitter_user, 'tweets': tweets, 'tweet_count': tweet_count})
 
+@login_required
 def follow_view(request, id):
     user_to_follow = TwitterUser.objects.get(id=id)
     request.user.following.add(user_to_follow)
     request.user.save()
     return HttpResponseRedirect(reverse('home'))
 
+@login_required
 def unfollow_view(request, id):
     user_to_follow = TwitterUser.objects.get(id=id)
     request.user.following.remove(user_to_follow)
